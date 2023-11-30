@@ -1,0 +1,37 @@
+version: '3.4'
+networks:
+  backend:
+services:
+  najotdb:
+    container_name: najpt-dbcontainer
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=pa@2or$%%dd
+    networks:
+      - backend
+    ports:  
+      - 7170:1433 
+
+  najotnur.web:
+    image: ${DOCKER_REGISTRY-}najotnurweb
+    build:
+      context: .
+      dockerfile: NajotNur.Web/Dockerfile
+    networks:
+     - backend
+    environment:
+     - DB_HOST=najotdb
+     - DB_NAME=NajotDb
+     - DB_SA_PASSWORD=pa@2or$%%dd
+
+  najotnurgetaway:
+    image: ${DOCKER_REGISTRY-}najotnurgetaway
+    build:
+      context: .
+      dockerfile: NajotNurGetaway/Dockerfile
+    ports:
+     - 7180:80
+    networks:
+     - backend
+

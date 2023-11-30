@@ -1,0 +1,21 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/Users/GetAllAsync",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "najotnur.web",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Users/GetAllAsync"
+    }
+   
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8015"
+  }
+}
